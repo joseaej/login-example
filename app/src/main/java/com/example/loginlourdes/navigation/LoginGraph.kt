@@ -8,9 +8,9 @@ import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
 import androidx.navigation.navigation
 import com.example.loginlourdes.SignUpScreen
-import com.example.loginlourdes.ui.Signin.SignInViewModel
-import com.example.loginlourdes.ui.accounts.AccountScreen
-import com.example.loginlourdes.ui.accounts.AccountsListViewModel
+import com.example.loginlourdes.Base.ui.Signin.SignInViewModel
+import com.example.loginlourdes.Base.ui.accounts.AccountScreen
+import com.example.loginlourdes.Base.ui.accounts.AccountsListViewModel
 import com.example.loginlourdes.ui.theme.Login.LoginScreen
 import com.example.loginlourdes.ui.theme.Login.LoginViewModel
 
@@ -63,7 +63,6 @@ private fun NavGraphBuilder.signUp(navController: NavController) {
                 navController.navigate(LoginGraph.login().replace("{email}", email).replace("{password}", password))
             },
             viewModel = signInViewModel,
-            goToAccounts = { navController.navigate(AccountGraph.ROUTE) }
         )
     }
 }

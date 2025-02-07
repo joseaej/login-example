@@ -1,5 +1,8 @@
 <resources>
     <string name="app_name">LoginLourdes</string>
-    <string name="signIN">Sign IN\n</string>
+    <string name="signIN">Sign IN</string>
     <string name="LogIn">LogIn</string>
+    <string name="list_acction_filter">Filter</string>
+    <string name="content_filter_description">Icono Filtrar</string>
+    <string name="title_account_list_screen">Listado Cuentas</string>
 </resources>

@@ -1,4 +1,4 @@
-package com.example.loginlourdes.ui
+package com.example.loginlourdes.Base.ui
 
 import androidx.compose.runtime.Composable
 

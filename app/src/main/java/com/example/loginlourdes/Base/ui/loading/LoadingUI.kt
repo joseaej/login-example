@@ -1,4 +1,4 @@
-package com.example.loginlourdes.ui.loading
+package com.example.loginlourdes.Base.ui.loading
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
@@ -17,8 +17,8 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.StrokeCap
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
-import com.example.loginlourdes.ui.accounts.AccountScreen
-import com.example.loginlourdes.ui.accounts.AccountsListViewModel
+import com.example.loginlourdes.Base.ui.accounts.AccountScreen
+import com.example.loginlourdes.Base.ui.accounts.AccountsListViewModel
 import kotlinx.coroutines.delay
 @Composable
 fun LoadingScreen(navController: NavController) {

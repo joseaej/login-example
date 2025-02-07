@@ -8,9 +8,9 @@ import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
 import androidx.navigation.navigation
 import com.example.loginlourdes.SignUpScreen
-import com.example.loginlourdes.ui.Signin.SignInViewModel
-import com.example.loginlourdes.ui.accounts.AccountScreen
-import com.example.loginlourdes.ui.accounts.AccountsListViewModel
+import com.example.loginlourdes.Base.ui.Signin.SignInViewModel
+import com.example.loginlourdes.Base.ui.accounts.AccountScreen
+import com.example.loginlourdes.Base.ui.accounts.AccountsListViewModel
 import com.example.loginlourdes.ui.theme.Login.LoginScreen
 import com.example.loginlourdes.ui.theme.Login.LoginViewModel
 
@@ -30,6 +30,10 @@ fun NavGraphBuilder.accountGraph(
 private fun NavGraphBuilder.accountList(navController: NavController) {
     composable(route = AccountGraph.accountList()) {
         val accountsListViewModel: AccountsListViewModel = hiltViewModel()
-        AccountScreen(accountsListViewModel)
+        AccountScreen(accountsListViewModel,
+            goToDetails = {},
+            goToCreation = {},
+            openDrawer = {}
+        )
     }
 }

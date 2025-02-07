@@ -1,4 +1,4 @@
-package com.example.loginlourdes.ui.accounts
+package com.example.loginlourdes.Base.ui.accounts
 
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -15,10 +15,11 @@ import javax.inject.Inject
 class AccountsListViewModel @Inject constructor():ViewModel() {
     var state by mutableStateOf<AccountListState>(AccountListState.Loading)
      private set
+    /*
     init {
         getList()
     }
-
+    */
     fun getList(){
         // se inicia la corrutina
         viewModelScope.launch {
@@ -31,9 +32,13 @@ class AccountsListViewModel @Inject constructor():ViewModel() {
                 }
                 else{
                 //2. Si no hay datos
-                state=AccountListState.NoData
+                state= AccountListState.NoData
                 }
             }
         }
+    }
+
+    fun delete(account: Account) {
+
     }
 }

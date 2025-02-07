@@ -1,4 +1,4 @@
-package com.example.loginlourdes.ui.theme
+package com.example.loginlourdes.Base.ui.theme
 
 import androidx.compose.ui.graphics.Color
 

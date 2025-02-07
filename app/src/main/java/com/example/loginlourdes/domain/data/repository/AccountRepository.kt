@@ -3,7 +3,7 @@ package com.example.loginlourdes.domain.data.repository
 import android.util.Log
 import com.example.loginlourdes.domain.data.model.Account
 import com.example.loginlourdes.domain.data.model.AccountException
-import com.example.loginlourdes.ui.network.BaseResult
+import com.example.loginlourdes.Base.ui.network.BaseResult
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
@@ -40,6 +40,7 @@ object AccountRepository {
         if (dataSet.contains(account)){
             return false
         }else{
+            account.id = dataSet.size+1
             dataSet.add(account)
             return true
         }

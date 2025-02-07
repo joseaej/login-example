@@ -17,7 +17,7 @@ import androidx.compose.ui.unit.sp
 import com.example.loginlourdes.Login.AccountRegisterState
 import com.example.loginlourdes.ui.theme.Login.LeadingEmailIcon
 import com.example.loginlourdes.ui.theme.Login.LeadingPassIcon
-import com.example.loginlourdes.ui.Signin.SignInViewModel
+import com.example.loginlourdes.Base.ui.Signin.SignInViewModel
 
 data class SinginEvents(
     val onEmailChange: (String) -> Unit,
@@ -29,7 +29,7 @@ data class SinginEvents(
 )
 
 @Composable
-fun SignUpScreen(viewModel: SignInViewModel,backToLogin:(String,String)->Unit,goToAccounts:()->Unit) {
+fun SignUpScreen(viewModel: SignInViewModel, backToLogin:(String, String)->Unit) {
     SignUpScreenContent(
         state = viewModel.state,
         events = SinginEvents(

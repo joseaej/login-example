@@ -2,7 +2,7 @@ package com.example.loginlourdes.domain.data.repository
 
 import com.example.loginlourdes.domain.data.model.Account
 import com.example.loginlourdes.domain.data.model.Dependency
-import com.example.loginlourdes.ui.network.BaseResult
+import com.example.loginlourdes.Base.ui.network.BaseResult
 
 object DependencyRepository {
     //region Simulacion de datos
@@ -19,7 +19,7 @@ object DependencyRepository {
     }
     //endregion
 
-    suspend fun validate(email: String, password: String):BaseResult<Dependency> {
+    suspend fun validate(email: String, password: String): BaseResult<Dependency> {
         return BaseResult.Success(Dependency(nombre = email, codigo = password))
     }
 }

@@ -12,8 +12,8 @@ import com.example.loginlourdes.domain.data.model.Account
 import com.example.loginlourdes.domain.data.model.AccountException
 import com.example.loginlourdes.domain.data.model.Session
 import com.example.loginlourdes.domain.data.repository.AccountRepository
-import com.example.loginlourdes.ui.network.BaseResult
-import com.example.loginlourdes.ui.network.BaseResultList
+import com.example.loginlourdes.Base.ui.network.BaseResult
+import com.example.loginlourdes.Base.ui.network.BaseResultList
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject

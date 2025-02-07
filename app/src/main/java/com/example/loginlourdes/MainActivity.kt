@@ -11,7 +11,7 @@ import com.example.loginlourdes.navigation.AccountGraph
 import com.example.loginlourdes.navigation.LoginGraph
 import com.example.loginlourdes.navigation.accountGraph
 import com.example.loginlourdes.navigation.loginGraph
-import com.example.loginlourdes.ui.theme.LoginLourdesTheme
+import com.example.loginlourdes.Base.ui.theme.LoginLourdesTheme
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
