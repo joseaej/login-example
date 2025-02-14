@@ -9,9 +9,7 @@ import androidx.navigation.navArgument
 import androidx.navigation.navigation
 import com.example.loginlourdes.SignUpScreen
 import com.example.loginlourdes.Base.ui.Signin.SignInViewModel
-import com.example.loginlourdes.Base.ui.accounts.AccountScreen
-import com.example.loginlourdes.Base.ui.accounts.AccountsListViewModel
-import com.example.loginlourdes.ui.theme.Login.LoginScreen
+import com.example.loginlourdes.Base.ui.Login.LoginScreen
 import com.example.loginlourdes.ui.theme.Login.LoginViewModel
 
 object LoginGraph {

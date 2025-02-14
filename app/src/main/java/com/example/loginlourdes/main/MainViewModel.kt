@@ -1,4 +1,4 @@
-package com.example.loginlourdes
+package com.example.loginlourdes.main
 
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -7,7 +7,6 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.loginlourdes.domain.data.model.Session
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -18,9 +17,12 @@ class MainViewModel @Inject constructor(private val session: Session) : ViewMode
         private set
 
     init {
+        checkUser()
+    }
+    private fun checkUser(){
         viewModelScope.launch {
-            session.isUserLoggedIn().collectLatest { isLoggedIn ->
-                state = state.copy(activeAccount = isLoggedIn)
+            session.isUserLoggedIn().collect() { isLoggedIn ->
+                state = MainState(activeAccount = isLoggedIn)
             }
         }
     }

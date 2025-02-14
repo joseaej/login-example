@@ -1,4 +1,4 @@
-package com.example.loginlourdes.Utils
+package com.example.loginlourdes.utils
 
 import java.text.SimpleDateFormat
 import java.util.Date

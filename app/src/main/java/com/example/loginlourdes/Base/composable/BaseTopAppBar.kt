@@ -4,6 +4,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -14,6 +15,13 @@ fun BaseTopAppBar(appBarState: BaseTopAppBarState) {
     var expanded by remember { mutableStateOf(false) }
 
     TopAppBar(
+        colors = TopAppBarColors(
+            containerColor = Color.Blue,
+            titleContentColor = Color.White,
+            actionIconContentColor = Color.White,
+            scrolledContainerColor = Color.White,
+            navigationIconContentColor = Color.White
+        ),
         title = { Text(text = appBarState.tittle) },
         navigationIcon = {
             IconButton(onClick = appBarState.upAction) {

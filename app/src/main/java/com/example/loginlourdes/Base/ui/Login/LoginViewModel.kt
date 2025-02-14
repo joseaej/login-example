@@ -1,27 +1,27 @@
 package com.example.loginlourdes.ui.theme.Login
 
-import android.util.Log
-import androidx.compose.runtime.State
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.loginlourdes.Utils.validaEmail
-import com.example.loginlourdes.domain.data.model.Account
+import com.example.loginlourdes.Base.ui.network.BaseResult
+import com.example.loginlourdes.utils.validaEmail
 import com.example.loginlourdes.domain.data.model.AccountException
 import com.example.loginlourdes.domain.data.model.Session
 import com.example.loginlourdes.domain.data.repository.AccountRepository
-import com.example.loginlourdes.Base.ui.network.BaseResult
-import com.example.loginlourdes.Base.ui.network.BaseResultList
+import com.example.loginlourdes.domain.data.repository.AccountRepositoryBD
+import com.example.loginlourdes.utils.validarPassword
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 const val TAG = "VIEWMODEL"
+
 @HiltViewModel
 class LoginViewModel @Inject constructor(
-    val sesion:Session
+    val sesion: Session,
+    val accountRepository: AccountRepository
 ) : ViewModel() {
 
     var state by mutableStateOf(LoginState())
@@ -30,52 +30,37 @@ class LoginViewModel @Inject constructor(
     /**
      * Al cambiar el email, valida que sea correcto.
      */
-
-    suspend fun initfields(email: String,password: String){
-        state = state.copy(email= email, password = password)
-        sesion.saveUserSession(email,password,true)
+    suspend fun initfields(email: String, password: String) {
+        if (state.email.isEmpty() || state.password.isEmpty()) {
+            state = state.copy(email = email, password = password)
+            sesion.saveUserSession(email, password, true)
+        }
     }
 
-    fun onEmailChange(email: String) {
-        // Reinicia errores previos
-        state = state.copy(isEmailError = false, emailErrorFormat = "")
-
-        // Ignorar espacios en blanco
-        if (email.contains(' ')) return
-
-        // Validar formato del email
-        if (!validaEmail(email)) {
-            state = state.copy(
-                isEmailError = true,
-                emailErrorFormat = "Email incorrecto",
-                email = email
-            )
-            return
+    fun onEmailChange(email: String){
+        state.passwordErrorFormat.let {
+            state = state.copy(isEmailError = false, emailErrorFormat = "")
         }
 
+        //1. Si el usuario pulsa caracter en blanco , ni se tiene en cuenta
+        if (email.contains(' '))return
+        //2. Si no es válido se modifica los valores del state
+        if (!validaEmail(email)){
+            state = state.copy(isEmailError = true, emailErrorFormat = "Email incorrecto", email = email)
+        }
         state = state.copy(email = email)
     }
-
-    /**
-     * Al cambiar la contraseña, reinicia errores previos.
-     */
-    fun onPasswordChange(password: String) {
-        // Reinicia errores previos
-        state = state.copy(isPasswordError = false, passwordErrorFormat = "")
-
-        // Ignorar espacios en blanco
-        if (password.contains(' ')) return
-
-        // Validar longitud o reglas de la contraseña (opcional)
-        if (password.length < 6) {
-            state = state.copy(
-                isPasswordError = true,
-                passwordErrorFormat = "La contraseña debe tener al menos 6 caracteres",
-                password = password
-            )
-            return
+    fun onPasswordChange(password: String){
+        state.passwordErrorFormat.let {
+            state = state.copy(isPasswordError = false, passwordErrorFormat = "")
         }
 
+        //1. Si el usuario pulsa caracter en blanco , ni se tiene en cuenta
+        if (password.contains(' '))return
+        //2. Si no es válido se modifica los valores del state
+        if (!validarPassword(password)){
+            state = state.copy(isPasswordError = true, passwordErrorFormat = "Contraseña incorrecto", password = password)
+        }
         state = state.copy(password = password)
     }
 
@@ -83,6 +68,7 @@ class LoginViewModel @Inject constructor(
      * Iniciar sesión.
      */
     fun onLoginClick() {
+        // Verificar si hay errores de validación
         if (state.isEmailError || state.isPasswordError || state.email.isEmpty() || state.password.isEmpty()) {
             state = state.copy(
                 success = false,
@@ -94,17 +80,36 @@ class LoginViewModel @Inject constructor(
         state = state.copy(isLoading = true)
 
         viewModelScope.launch {
-            val isValid = AccountRepository.validate(state.email, state.password)
+            /*
+            when (val result = accountRepositoryBD.validate(state.email, state.password)) {
+                is BaseResult.Success -> {
+                    state = state.copy(success = true)
+                }
+                is BaseResult.Error -> {
+                    when (result.exception) {
+                        is AccountException.NoExistAccount -> {
+                            state = state.copy(emailErrorFormat = "La cuenta no existe", isEmailError = true)
+                        }
+                        else -> {
+                            state = state.copy(emailErrorFormat = "Error desconocido", isEmailError = true)
+                        }
+                    }
+                }
+            }*/
+            viewModelScope.launch {
+                val isValid = accountRepository.validate(state.email, state.password)
 
-            state = if (isValid) {
-                state.copy(success = true, isLoading = false)
-            } else {
-                state.copy(
-                    success = false,
-                    isLoading = false,
-                    emailErrorFormat = AccountException.NoExistAccount.message.toString()
-                )
+                state = if (isValid) {
+                    state.copy(success = true, isLoading = false)
+                } else {
+                    state.copy(
+                        success = false,
+                        isLoading = false,
+                        emailErrorFormat = AccountException.NoExistAccount.message.toString()
+                    )
+                }
             }
         }
+
     }
 }

@@ -1,6 +1,6 @@
 package com.example.loginlourdes.Base.ui.accounts
 
-import com.example.loginlourdes.domain.data.model.Account
+import com.example.loginlourdes.domain.data.model.account.Account
 
 sealed class AccountListState {
     data object NoData: AccountListState()

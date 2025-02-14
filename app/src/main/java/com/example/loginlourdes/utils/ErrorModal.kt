@@ -1,4 +1,4 @@
-package com.example.loginlourdes.Utils
+package com.example.loginlourdes.utils
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape

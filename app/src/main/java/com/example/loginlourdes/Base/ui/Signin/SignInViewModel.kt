@@ -7,13 +7,14 @@ import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.loginlourdes.Login.AccountRegisterState
-import com.example.loginlourdes.Utils.validaEmail
-import com.example.loginlourdes.Utils.validarDate
-import com.example.loginlourdes.Utils.validarPassword
-import com.example.loginlourdes.domain.data.model.Account
+import com.example.loginlourdes.utils.validaEmail
+import com.example.loginlourdes.utils.validarDate
+import com.example.loginlourdes.utils.validarPassword
+import com.example.loginlourdes.domain.data.model.account.Account
 import com.example.loginlourdes.domain.data.repository.AccountRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
+import java.util.Date
 import javax.inject.Inject
 
 const val TAG = "VIEWMODEL"
@@ -26,7 +27,7 @@ class SignInViewModel @Inject constructor():ViewModel() {
     //Opcion Developers
     var state by mutableStateOf(AccountRegisterState())
         private set
-    var account:Account = Account()
+    var account: Account = Account()
     /**
      * On email change, comprueba que el email sea correcto
      *
@@ -91,17 +92,19 @@ class SignInViewModel @Inject constructor():ViewModel() {
         }
         state = state.copy(success = true)
         updateAccount()
-        if (!AccountRepository.validate(account.email,account.password,account.birthDate)){
+        if (!AccountRepository.validate(account.email.value,account.password,
+                account.birthDate.toString()
+            )){
             viewModelScope.launch {
                 AccountRepository.addAccount(account)
             }
         }
     }
     private fun updateAccount(){
-        account.email = state.email
+        account.email.value = state.email
         account.name = state.user
         account.password = state.password
-        account.birthDate = state.birthdate
+        account.birthDate = Date(state.birthdate)
     }
 
     fun reset(){

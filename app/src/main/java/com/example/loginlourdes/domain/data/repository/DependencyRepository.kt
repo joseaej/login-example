@@ -1,6 +1,5 @@
 package com.example.loginlourdes.domain.data.repository
 
-import com.example.loginlourdes.domain.data.model.Account
 import com.example.loginlourdes.domain.data.model.Dependency
 import com.example.loginlourdes.Base.ui.network.BaseResult
 

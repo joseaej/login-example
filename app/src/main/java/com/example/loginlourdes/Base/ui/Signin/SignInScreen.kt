@@ -15,8 +15,8 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.loginlourdes.Login.AccountRegisterState
-import com.example.loginlourdes.ui.theme.Login.LeadingEmailIcon
-import com.example.loginlourdes.ui.theme.Login.LeadingPassIcon
+import com.example.loginlourdes.Base.ui.Login.LeadingEmailIcon
+import com.example.loginlourdes.Base.ui.Login.LeadingPassIcon
 import com.example.loginlourdes.Base.ui.Signin.SignInViewModel
 
 data class SinginEvents(

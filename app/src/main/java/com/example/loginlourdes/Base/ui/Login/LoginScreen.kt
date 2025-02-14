@@ -1,4 +1,4 @@
-package com.example.loginlourdes.ui.theme.Login
+package com.example.loginlourdes.Base.ui.Login
 
 
 import androidx.compose.foundation.layout.*
@@ -15,7 +15,8 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
-import com.example.loginlourdes.Utils.ErrorModal
+import com.example.loginlourdes.ui.theme.Login.LoginState
+import com.example.loginlourdes.ui.theme.Login.LoginViewModel
 
 data class LoginEvents(
     val onEmailChange: (String) -> Unit,
@@ -24,7 +25,7 @@ data class LoginEvents(
     val onRegisterClick: () -> Unit
 )
 @Composable
-fun LoginScreen(loginViewModel: LoginViewModel,email:String,password:String, goToRegister: () -> Unit, goToAccounts: () -> Unit) {
+fun LoginScreen(loginViewModel: LoginViewModel, email:String, password:String, goToRegister: () -> Unit, goToAccounts: () -> Unit) {
 
     LaunchedEffect(email,password) {
         loginViewModel.initfields(email, password)
@@ -36,12 +37,7 @@ fun LoginScreen(loginViewModel: LoginViewModel,email:String,password:String, goT
             onLoginClick = loginViewModel::onLoginClick,
             onRegisterClick = goToRegister
         ),
-        state = LoginState(
-            email = email,
-            password = password,
-            isEmailError = loginViewModel.state.isEmailError,
-            emailErrorFormat = loginViewModel.state.emailErrorFormat
-        )
+        state = loginViewModel.state
     )
     if (loginViewModel.state.success) {
         goToAccounts()
