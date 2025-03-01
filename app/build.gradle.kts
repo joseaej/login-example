@@ -6,6 +6,7 @@ plugins {
     //alias (libs.plugins.kotlin.kapt)
     alias (libs.plugins.kotlin.ksp)
     alias(libs.plugins.room)
+
 }
 
 room {
@@ -18,7 +19,7 @@ android {
 
     defaultConfig {
         applicationId = "com.example.loginlourdes"
-        minSdk = 33
+        minSdk = 31
         targetSdk = 34
         versionCode = 1
         versionName = "1.0"
@@ -70,16 +71,10 @@ dependencies {
     implementation(libs.androidx.ui.tooling.preview)
     implementation(libs.androidx.material3)
     implementation(libs.androidx.espresso.core)
-    testImplementation(libs.junit)
-    androidTestImplementation(libs.androidx.junit)
-    androidTestImplementation(libs.androidx.espresso.core)
-    androidTestImplementation(platform(libs.androidx.compose.bom))
-    androidTestImplementation(libs.androidx.ui.test.junit4)
-    debugImplementation(libs.androidx.ui.tooling)
-    debugImplementation(libs.androidx.ui.test.manifest)
 
     //Usar hilt
     implementation(libs.hilt.android)
+    testImplementation(libs.jupiter.junit.jupiter)
     //kapt(libs.hilt.android.compiler)
     ksp(libs.hilt.android.compiler)
     implementation(libs.androidx.hilt.navigationcompose)
@@ -92,4 +87,17 @@ dependencies {
     ksp(libs.room.compiler)
     annotationProcessor(libs.room.compiler)
 
+    //Testing Instrumentales
+    androidTestImplementation(libs.androidx.junit)
+    androidTestImplementation(libs.androidx.espresso.core)
+    androidTestImplementation(platform(libs.androidx.compose.bom))
+    androidTestImplementation(libs.androidx.ui.test.junit4)
+    debugImplementation(libs.androidx.ui.tooling)
+    debugImplementation(libs.androidx.ui.test.manifest)
+
+    testImplementation(libs.junit)
+
+    androidTestImplementation(libs.androidx.navigation.test)
+    androidTestImplementation(libs.mockk.android)
+    
 }

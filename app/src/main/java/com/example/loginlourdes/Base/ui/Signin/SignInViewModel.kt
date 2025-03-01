@@ -12,6 +12,7 @@ import com.example.loginlourdes.utils.validarDate
 import com.example.loginlourdes.utils.validarPassword
 import com.example.loginlourdes.domain.data.model.account.Account
 import com.example.loginlourdes.domain.data.repository.AccountRepository
+import com.example.loginlourdes.domain.data.repository.AccountRepositoryBD
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import java.util.Date
@@ -20,14 +21,16 @@ import javax.inject.Inject
 const val TAG = "VIEWMODEL"
 
 @HiltViewModel
-class SignInViewModel @Inject constructor():ViewModel() {
+class SignInViewModel @Inject constructor(
+    private val accountRepository: AccountRepositoryBD
+):ViewModel() {
     //Opcion Google
     private val _stateGoogle = mutableStateOf(AccountRegisterState())    //si mutable
     val stateGoogle: State<AccountRegisterState> = _stateGoogle    //no mutable
     //Opcion Developers
     var state by mutableStateOf(AccountRegisterState())
         private set
-    var account: Account = Account()
+    var account: Account = Account.empty()
     /**
      * On email change, comprueba que el email sea correcto
      *
@@ -92,23 +95,19 @@ class SignInViewModel @Inject constructor():ViewModel() {
         }
         state = state.copy(success = true)
         updateAccount()
-        if (!AccountRepository.validate(account.email.value,account.password,
-                account.birthDate.toString()
-            )){
-            viewModelScope.launch {
-                AccountRepository.addAccount(account)
-            }
+        viewModelScope.launch {
+            accountRepository.insert(account)
         }
     }
     private fun updateAccount(){
         account.email.value = state.email
         account.name = state.user
         account.password = state.password
-        account.birthDate = Date(state.birthdate)
+        account.birthdate = Date(state.birthdate)
     }
 
     fun reset(){
         state = state.copy(success = false, user = "", email = "", password = "", birthdate = "")
-        account = Account()
+        account = Account.empty()
     }
 }

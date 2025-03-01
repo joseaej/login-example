@@ -48,7 +48,7 @@ fun SignUpScreen(viewModel: SignInViewModel, backToLogin:(String, String)->Unit)
 }
 
 @Composable
-private fun SignUpScreenContent(
+fun SignUpScreenContent(
     modifier: Modifier = Modifier,
     events: SinginEvents,
     state: AccountRegisterState
@@ -170,4 +170,3 @@ fun LeadingPassIcon() {
         tint = MaterialTheme.colorScheme.primary
     )
 }
-

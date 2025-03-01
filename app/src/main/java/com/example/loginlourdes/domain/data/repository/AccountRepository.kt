@@ -22,18 +22,20 @@ object AccountRepository {
                 email = Email("usuario2@example.com"),
                 password = "pass456",
                 name = "María",
-                birthDate = SimpleDateFormat("dd/mm/yyyy", Locale.getDefault()).parse("02/22/2004"),
-                lastName = "López",
-                displayName = "MariaL",
+                birthdate = SimpleDateFormat("dd/mm/yyyy", Locale.getDefault()).parse("02/22/2004"),
+                displayName = "García",
+                firebaseUID = "firebase1",
+                surname = "maria"
             ),)
             add(Account(
                 id = 1,
                 email = Email("usuario1@example.com"),
                 password = "password123",
                 name = "José",
-                birthDate = SimpleDateFormat("dd/mm/yyyy", Locale.getDefault()).parse("02/22/2004"),
-                lastName = "García",
-                displayName = "PepeG",
+                birthdate = SimpleDateFormat("dd/mm/yyyy", Locale.getDefault()).parse("02/22/2004"),
+                displayName = "García",
+                firebaseUID = "firebase2",
+                surname = "pepe"
             ))
         }
 

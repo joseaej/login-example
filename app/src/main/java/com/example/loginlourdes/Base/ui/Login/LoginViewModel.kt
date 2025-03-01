@@ -1,5 +1,6 @@
 package com.example.loginlourdes.ui.theme.Login
 
+import android.accounts.Account
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
@@ -21,7 +22,7 @@ const val TAG = "VIEWMODEL"
 @HiltViewModel
 class LoginViewModel @Inject constructor(
     val sesion: Session,
-    val accountRepository: AccountRepository
+    val accountRepository: AccountRepositoryBD
 ) : ViewModel() {
 
     var state by mutableStateOf(LoginState())
@@ -99,14 +100,17 @@ class LoginViewModel @Inject constructor(
             viewModelScope.launch {
                 val isValid = accountRepository.validate(state.email, state.password)
 
-                state = if (isValid) {
-                    state.copy(success = true, isLoading = false)
-                } else {
-                    state.copy(
-                        success = false,
-                        isLoading = false,
-                        emailErrorFormat = AccountException.NoExistAccount.message.toString()
-                    )
+                state= when(isValid){
+                    is BaseResult.Success ->{
+                        state.copy(success = true, isLoading = false)
+                    }
+                    else->{
+                        state.copy(
+                            success = false,
+                            isLoading = false,
+                            emailErrorFormat = AccountException.NoExistAccount.message.toString()
+                        )
+                    }
                 }
             }
         }

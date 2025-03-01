@@ -73,15 +73,17 @@ abstract class LoginDatabase : RoomDatabase() {
             //bloque de ejecución secuencial
 
             runBlocking {
+                /*
                 accountDao.insert(
                     Account(
                         id = 1,
                         email = Email("usuario1@example.com"),
                         password = "password123",
                         name = "José",
-                        birthDate = SimpleDateFormat("dd/mm/yyyy", Locale.getDefault()).parse("02/22/2004"),
-                        lastName = "García",
-                        displayName = "PepeG",
+                        birthdate = SimpleDateFormat("dd/mm/yyyy", Locale.getDefault()).parse("02/22/2004"),
+                        displayName = "García",
+                        firebaseUID = "firebase1",
+                        surname = "jose"
                     )
                 )
                 accountDao.insert(
@@ -90,9 +92,10 @@ abstract class LoginDatabase : RoomDatabase() {
                         email = Email("usuario2@example.com"),
                         password = "pass456",
                         name = "María",
-                        birthDate = SimpleDateFormat("dd/mm/yyyy", Locale.getDefault()).parse("02/22/2004"),
-                        lastName = "López",
-                        displayName = "MariaL",
+                        birthdate = SimpleDateFormat("dd/mm/yyyy", Locale.getDefault()).parse("02/22/2004"),
+                        displayName = "García",
+                        firebaseUID = "firebase2",
+                        surname = "maria"
                     ),
                 )
                 accountDao.insert(
@@ -101,9 +104,10 @@ abstract class LoginDatabase : RoomDatabase() {
                         email = Email("usuario3@example.com"),
                         password = "clave789",
                         name = "Carlos",
-                        birthDate = SimpleDateFormat("dd/mm/yyyy", Locale.getDefault()).parse("02/22/2004"),
-                        lastName = "Fernández",
-                        displayName = "CarlitosF",
+                        birthdate = SimpleDateFormat("dd/mm/yyyy", Locale.getDefault()).parse("02/22/2004"),
+                        displayName = "García",
+                        firebaseUID = "firebase3",
+                        surname = "carlitos"
                     )
                 )
                 personalDao.insert(
@@ -132,8 +136,7 @@ abstract class LoginDatabase : RoomDatabase() {
                             postalCode = 29003,
                         )
                     )
-                )
-
+                )*/
             }
         }
     }

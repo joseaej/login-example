@@ -5,4 +5,6 @@
     <string name="list_acction_filter">Filter</string>
     <string name="content_filter_description">Icono Filtrar</string>
     <string name="title_account_list_screen">Listado Cuentas</string>
+    <string name="message_offline">Estas desconectado</string>
+    <string name="no_data_messaje">No hay datos que cargar</string>
 </resources>
